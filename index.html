@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anticovid</title>
+    <link rel="icon" type="image/png" href="image/introIcon.png">
+    <link rel="stylesheet" href="styles/styleIntro.css">
+</head>
+<body>
+    <div class="inicio">
+        <a href="juego.html">PLAY!</a>
+        <p>
+            '<strong>W</strong>' ▬ Mover hacia Arriba
+            <br>'<strong>S</strong>' ▬ Mover hacia Abajo
+            <br>'<strong>A</strong>' ▬ Mover hacia la Izquierda
+            <br>'<strong>D</strong>' ▬ Mover hacia la Derecha
+            <br>'<strong>P</strong>' ▬ Diparar
+        </p>
+        <button id="boton">Instrucciones</button>
+        <script>
+             let mostrarIntruccion = document.querySelector("p")
+             let infoMostrar = document.querySelector("#boton")
+             
+             mostrarIntruccion.style.display = "none"
+
+             infoMostrar.addEventListener("click", (mostrar) => {
+                mostrar.preventDefault()
+                mostrarIntruccion.style.display = "block"
+             })
+
+
+        </script>
+    </div>
+</body>
+</html>

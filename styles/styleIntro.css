@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.inicio {
+    width: 800px;
+    height: 600px;
+    background-image: url("../image/introFond.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a{
+    padding: 25px;
+    background-color: rgba(9, 108, 138, 0.664);
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+    border-radius: 25px;
+    margin: 50px;
+
+   
+}
+
+a:hover{
+    background-color: rgba(9, 122, 175, 0.548);
+}
+
+#boton{
+    padding: 25px;
+    border: none;
+    background-color: rgba(9, 108, 138, 0.664);
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+    border-radius: 25px;
+}
+
+#boton:hover{
+    background-color: rgba(9, 122, 175, 0.548);
+}
+
+p{
+    padding: 15px;
+    background-color: rgba(9, 108, 138, 0.664);
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    border-radius: 15px;
+}
+
