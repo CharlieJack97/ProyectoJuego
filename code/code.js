@@ -45,14 +45,14 @@ class Nurse{// --------------------------- Personaje
 
     arriba(){
         console.log("moverse hacia arriba")
-        if(this.h < 445){
+        if(this.y > 86){
             this.y -= 13.5
         }  
     }
     
     abajo(){
         console.log("moverse hacia abajo")
-        if (this.y - this.h < 150){
+        if (this.y < 135){
             this.y += 13.5
         }
     }
@@ -69,20 +69,22 @@ class Nurse{// --------------------------- Personaje
 
 
 class Virus{// ---------------------------- Hostil 1
-    constructor(x, y, w, h, imagen){
+    constructor(x, y, w, h, imagen, level){
         this.x = x
         this.y = y
         this.w = w
         this.h = h
         this.imagen = imagen
+        this.level = level
+        
     }
     
     mostrar(){
         ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h);
-        if(this.nivel === "facil"){
-            this.x -= 1;
+        if(this.level === "simple"){
+            this.x -= 4;
         }else{
-            this.x-=3
+            this.x-=7
         }
     }
 }
@@ -119,19 +121,49 @@ function teclas(enfermero){
 
 //====== VARIABLES GLOBAL =======
 const enfermero = new Nurse(5, 137, 17, 12, nurseImg)
-const viruses = new Virus(258, 136, 17, 12, virusImg)
+/*const viruses = new Virus(258, 136, 17, 12, virusImg, "")
 const viruses2 = new Virus(258, 123, 17, 12, virusImg)
-//const viruses3 = new Virus(258, 110, 17, 12, virusImg)
-//const viruses4 = new Virus(258, 123, 17, 12, virusImg)
+const viruses3 = new Virus(258, 109, 17, 12, virusImg)
+const viruses4 = new Virus(258, 96, 17, 12, virusImg)
+const viruses5 = new Virus(258, 82, 17, 12, virusImg)
+*/
 
 //====== CREACION DE OBJETOS =======
 function crearVirus(){
-
-    const cant = Math.floor(Math.random() * 100);
-        if(cant === 5){  
-        viral.push(viruses);
+    
+    const cant = Math.floor(Math.random() * 60);
+        if(cant === 4){  
+        const viruses = new Virus(258, 136, 17, 12, virusImg)
+        viral.push(viruses)
+        viruses.mostrar()
+        console.log("creando virus")
+    }
+        if(cant === 3){  
+       const viruses2 = new Virus(258, 123, 17, 12, virusImg)
+        viral.push(viruses2)
+        viruses2.mostrar()
+        console.log("creando virus")
+    }
+        if(cant === 2){  
+        const viruses3 = new Virus(258, 109, 17, 12, virusImg)
+        viral.push(viruses3)
+        viruses3.mostrar()
+        console.log("creando virus")
+    }
+        if(cant === 1){  
+        const viruses4 = new Virus(258, 96, 17, 12, virusImg)
+        viral.push(viruses4)
+        viruses4.mostrar()
+        console.log("creando virus")
+    }
+        if(cant === 0){  
+        const viruses5 = new Virus(258, 82, 17, 12, virusImg)
+        viral.push(viruses5)
+        viruses5.mostrar()
+        console.log("creando virus")
     }
 }
+
 
 
 //############## INICIO DE JUEGOS ##############
@@ -147,15 +179,18 @@ function iniciar(){
    setInterval(() =>{
     ctx.clearRect(0, 0, 330, 210)
     enfermero.mostrar()
-    viruses.mostrar()
-    viruses2.mostrar()
-    viruses2.mostrar()
-    //viruses3.mostrar()
-    //viruses4.mostrar()
+   
 
-   },50)
-    iniciar()
+    viral.forEach((virus) =>{
+        console.log(viral)
+        virus.mostrar()
+    })
+
+
+   
     crearVirus()
-
+   },50)
+    
+   iniciar()
     
 
