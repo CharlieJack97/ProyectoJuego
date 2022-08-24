@@ -10,48 +10,39 @@ nurseImg.src= "../image/Nurse3Male.webp"
 const virusImg = new Image()
 virusImg.src = "../image/virus.png"
 
-/*const vacunaImg = new Image()
-vacunaImg.src = "../image/vacuna.png"*/
+const vacunaImg = new Image()
+vacunaImg.src = "../image/vacuna.png"
 
 const pildoraImg = new Image()
 pildoraImg.src = "../image/pildora.png"
-
-// ======== ENCABEZADO ========
-/*function encabezado(){
-    ctx.beginPath()
-    ctx.moveTo(0,170);
-    ctx.lineTo(340,170);
-    ctx.stroke();
-    ctx.closePath();
-}
-
-dibujarPiso();
-
-// Mostrar el nombre del juego
-
-/*function datos(score, vida){
-    ctx.fillStyle = "black";
-    ctx.font = "24px Arial";
-    ctx.fillText("Trexito", 140,20);
-    //distacia
-    ctx.fillText(`${distancia} m`,20,20);
-    //score
-    ctx.fillText(`Score: ${score}`, 230, 20);
-    ctx.fillText(`Vida: ${vida}`, 230, 50);*/
 
 
 //======= ELEMENTOS =======
 const viral = []
 const pildoras = []
+const jeringuillas = []
+
+function mostrarInfo(score, vida){
+    ctx.fillStyle = "cornflowerblue";
+    ctx.font = "10px georgia bond";
+    ctx.fillText("Anticovid Force", 120,12);
+    //score
+    ctx.fillText(`Score: ${score}`, 40, 65);
+    ctx.fillText(`Vida: ${vida}`, 200, 65);
+}
+
+
 
 //======= CLASES ========
 class Nurse{// --------------------------- Personaje
-    constructor(x, y, w, h, imagen){
+    constructor(x, y, w, h, imagen, score, vida){
         this.x = x
         this.y = y
         this.w = w
         this.h = h
         this.imagen = imagen
+        this.score = score
+        this.vida = vida
         }
     derecha(){
         console.log("moverse hacia la derecha")
@@ -81,12 +72,15 @@ class Nurse{// --------------------------- Personaje
         }
     }
     mostrar(){
+        ctx.fillRect(this.x, this.y, this.w, this.h)
         ctx.drawImage(this.imagen, this.x, this.y, this.w, this.h)
     }
 
     morirse(){
     }
     disparar(){
+        const vacuna = new Vacuna(this.x + this.w, this.y + 10, 17, 12, vacunaImg);
+        jeringuillas.push(vacuna)
     }
 }
 
@@ -103,6 +97,7 @@ class Virus{// ---------------------------- Hostil 1
     }
     
     mostrar(){
+        ctx.fillRect(this.x, this.y, this.w, this.h)
         ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h);
         if(this.level === "simple"){
             this.x -= 4;
@@ -164,7 +159,7 @@ function teclas(enfermero){
 
 
 //====== VARIABLES GLOBAL =======
-const enfermero = new Nurse(5, 137, 17, 12, nurseImg)
+const enfermero = new Nurse(5, 136, 17, 12, nurseImg, 0, 100)
 /*const viruses = new Virus(258, 136, 17, 12, virusImg)
 const viruses2 = new Virus(258, 123, 17, 12, virusImg)
 const viruses3 = new Virus(258, 109, 17, 12, virusImg)
@@ -255,14 +250,22 @@ function iniciar(){
 
 }
 
-   setInterval(() =>{
+   let clear = setInterval(() =>{
     ctx.clearRect(0, 0, 330, 210)
     enfermero.mostrar()
+    mostrarInfo(enfermero.score, enfermero.vida)
    
 
     viral.forEach((virus) =>{
         console.log(viral)
         virus.mostrar()
+        if (virus.x <= enfermero.x + enfermero.w - 9 &&
+             virus.x >= enfermero.x && 
+             virus.y <= enfermero.y + enfermero.h - 9 && 
+             virus.y >= enfermero.y){
+            alert("Game Over")
+            clearInterval(clear)
+        }
     })
 
     pildoras.forEach((pildora) =>{
@@ -271,11 +274,13 @@ function iniciar(){
     })
 
 
+
    
     crearVirus()
     crearPildoras()
    },50)
     
    iniciar()
+   
     
 
