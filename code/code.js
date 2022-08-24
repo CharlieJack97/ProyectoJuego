@@ -10,6 +10,18 @@ nurseImg.src= "../image/Nurse3Male.webp"
 const virusImg = new Image()
 virusImg.src = "../image/virus.png"
 
+const virus2Img = new Image()
+virus2Img.src = "../image/virus2.png"
+
+const virus3Img = new Image()
+virus3Img.src = "../image/virus3.png"
+
+const virus4Img = new Image()
+virus4Img.src = "../image/virus4.png"
+
+const virus5Img = new Image()
+virus5Img.src = "../image/virus5.png"
+
 const vacunaImg = new Image()
 vacunaImg.src = "../image/vacuna.png"
 
@@ -72,7 +84,7 @@ class Nurse{// --------------------------- Personaje
         }
     }
     mostrar(){
-        ctx.fillRect(this.x, this.y, this.w, this.h)
+        //ctx.fillRect(this.x, this.y, this.w, this.h)
         ctx.drawImage(this.imagen, this.x, this.y, this.w, this.h)
     }
 
@@ -97,7 +109,7 @@ class Virus{// ---------------------------- Hostil 1
     }
     
     mostrar(){
-        ctx.fillRect(this.x, this.y, this.w, this.h)
+        //ctx.fillRect(this.x, this.y, this.w, this.h)
         ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h);
         if(this.level === "simple"){
             this.x -= 4;
@@ -178,25 +190,25 @@ function crearVirus(){
         console.log("creando virus")
     }
         if(cant === 3){  
-       const viruses2 = new Virus(330, 123, 17, 12, virusImg)
+       const viruses2 = new Virus(330, 123, 17, 12, virus2Img)
         viral.push(viruses2)
         viruses2.mostrar()
         console.log("creando virus")
     }
         if(cant === 2){  
-        const viruses3 = new Virus(330, 109, 17, 12, virusImg)
+        const viruses3 = new Virus(330, 109, 17, 12, virus3Img)
         viral.push(viruses3)
         viruses3.mostrar()
         console.log("creando virus")
     }
         if(cant === 1){  
-        const viruses4 = new Virus(330, 96, 17, 12, virusImg)
+        const viruses4 = new Virus(330, 96, 17, 12, virus4Img)
         viral.push(viruses4)
         viruses4.mostrar()
         console.log("creando virus")
     }
         if(cant === 0){  
-        const viruses5 = new Virus(330, 82, 17, 12, virusImg)
+        const viruses5 = new Virus(330, 82, 17, 12, virus5Img)
         viral.push(viruses5)
         viruses5.mostrar()
         console.log("creando virus")
@@ -263,15 +275,29 @@ function iniciar(){
              virus.x >= enfermero.x && 
              virus.y <= enfermero.y + enfermero.h - 9 && 
              virus.y >= enfermero.y){
-            alert("Game Over")
-            clearInterval(clear)
+               
+            viral.splice(0,1)
+            enfermero.vida -= 20
+            
+            //alert("Game Over")
+            //clearInterval(clear)
         }
+        
     })
 
-    pildoras.forEach((pildora) =>{
+    
+    /*pildoras.forEach((pildora) =>{
         console.log(pildoras)
         pildora.mostrar()
-    })
+        if (enfermero.vida === 100){
+            enfermero.vida += 0
+        }
+        if (pildora.x <= enfermero.x + enfermero.w - 9 && pildora.x >= enfermero.x && pildora.y <= enfermero.y + enfermero.h - 9 && pildora.y >= enfermero.y){
+            pildoras.splice(0.1)
+            enfermero.vida += 20
+        }
+
+    })*/
 
 
 
