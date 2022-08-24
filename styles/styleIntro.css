@@ -4,10 +4,10 @@
 }
 
 .inicio {
-    width: 800px;
-    height: 600px;
+    width: 100%;
+    height: 830px;
     background-image: url("../image/introFond.jpg");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;
@@ -44,7 +44,7 @@ a:hover{
     background-color: rgba(9, 122, 175, 0.548);
 }
 
-p{
+p.modal{
     padding: 15px;
     background-color: rgba(9, 108, 138, 0.664);
     color: white;

@@ -1,7 +1,5 @@
 *{  
     background: white;
-    margin: 0;
-    height: 0;
 }
 
 .cuerpo{
@@ -19,5 +17,5 @@ canvas{
     height: 700px;
    background-image: url("../image/fondoJuegoPlay.png");
    background-size: cover;
-   *position: absolute;
+
 }

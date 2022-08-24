@@ -35,7 +35,7 @@ const pildoras = []
 const jeringuillas = []
 
 function mostrarInfo(score, vida){
-    ctx.fillStyle = "cornflowerblue";
+    ctx.fillStyle = "blue";
     ctx.font = "10px georgia bond";
     ctx.fillText("Anticovid Force", 120,12);
     //score
@@ -172,12 +172,7 @@ function teclas(enfermero){
 
 //====== VARIABLES GLOBAL =======
 const enfermero = new Nurse(5, 136, 17, 12, nurseImg, 0, 100)
-/*const viruses = new Virus(258, 136, 17, 12, virusImg)
-const viruses2 = new Virus(258, 123, 17, 12, virusImg)
-const viruses3 = new Virus(258, 109, 17, 12, virusImg)
-const viruses4 = new Virus(258, 96, 17, 12, virusImg)
-const viruses5 = new Virus(258, 82, 17, 12, virusImg)
-*/
+
 
 //====== CREACION DE OBJETOS =======
 function crearVirus(){
@@ -217,7 +212,7 @@ function crearVirus(){
 
 function crearPildoras(){
     
-    const cant = Math.floor(Math.random() * 1000);
+    const cant = Math.floor(Math.random() * 2000);
         if(cant === 4){  
         const pildora = new Virus(330, 136, 17, 12, pildoraImg)
         pildoras.push(pildora)
@@ -268,15 +263,15 @@ function iniciar(){
     mostrarInfo(enfermero.score, enfermero.vida)
    
 
-    viral.forEach((virus) =>{
+    viral.forEach((virus, index) =>{
         console.log(viral)
         virus.mostrar()
         if (virus.x <= enfermero.x + enfermero.w - 9 &&
              virus.x >= enfermero.x && 
-             virus.y <= enfermero.y + enfermero.h - 9 && 
+             virus.y <= enfermero.y + enfermero.h && 
              virus.y >= enfermero.y){
                
-            viral.splice(0,1)
+            viral.splice(index, 1)
             enfermero.vida -= 20
             
             //alert("Game Over")
@@ -286,18 +281,15 @@ function iniciar(){
     })
 
     
-    /*pildoras.forEach((pildora) =>{
+    pildoras.forEach((pildora, index) =>{
         console.log(pildoras)
         pildora.mostrar()
-        if (enfermero.vida === 100){
-            enfermero.vida += 0
-        }
-        if (pildora.x <= enfermero.x + enfermero.w - 9 && pildora.x >= enfermero.x && pildora.y <= enfermero.y + enfermero.h - 9 && pildora.y >= enfermero.y){
-            pildoras.splice(0.1)
+
+        if (pildora.x <= enfermero.x + enfermero.w - 9 && pildora.x >= enfermero.x && pildora.y <= enfermero.y + enfermero.h && pildora.y >= enfermero.y && enfermero.vida < 100){
+            pildoras.splice(index, 1)
             enfermero.vida += 20
         }
-
-    })*/
+    })
 
 
 
