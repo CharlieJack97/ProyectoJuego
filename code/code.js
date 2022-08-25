@@ -2,10 +2,13 @@
 let lienzo = document.getElementById("lienzo")
 let ctx = lienzo.getContext("2d")
 
+//======= Musica ========
+let sound = new Audio("../sound/Música.mp3")
+sound.play()
+
 //======= IMAGENES =======
 const nurseImg = new Image()
 nurseImg.src= "../image/Nurse3Male.webp"
-
 
 const virusImg = new Image()
 virusImg.src = "../image/virus.png"
@@ -23,7 +26,7 @@ const virus5Img = new Image()
 virus5Img.src = "../image/virus5.png"
 
 const vacunaImg = new Image()
-vacunaImg.src = "../image/vacuna.png"
+vacunaImg.src = "../image/vacuna17x12.png"
 
 const pildoraImg = new Image()
 pildoraImg.src = "../image/pildora.png"
@@ -35,18 +38,18 @@ const pildoras = []
 const jeringuillas = []
 
 function mostrarInfo(score, vida){
-    ctx.fillStyle = "blue";
-    ctx.font = "10px georgia bond";
-    ctx.fillText("Anticovid Force", 120,12);
+    ctx.fillStyle = "blue"
+    ctx.font = "10px georgia bond"
+    ctx.fillText("Anticovid Force", 120,12)
     //score
-    ctx.fillText(`Score: ${score}`, 40, 65);
-    ctx.fillText(`Vida: ${vida}`, 200, 65);
+    ctx.fillText(`Score: ${score}`, 40, 65)
+    ctx.fillText(`Vida: ${vida}`, 200, 65)
 }
 
 
 
 //======= CLASES ========
-class Nurse{// --------------------------- Personaje
+class Nurse{// --------------------------------------------> Personaje
     constructor(x, y, w, h, imagen, score, vida){
         this.x = x
         this.y = y
@@ -91,14 +94,16 @@ class Nurse{// --------------------------- Personaje
     morirse(){
     }
     disparar(){
-        const vacuna = new Vacuna(this.x + this.w, this.y + 10, 17, 12, vacunaImg);
+        console.log("disparar")
+        const vacuna = new Vacunas(this.x + this.w, this.y + 0, 17, 12, vacunaImg)
         jeringuillas.push(vacuna)
+        console.log(vacuna)
     }
 }
 
 
 
-class Virus{// ---------------------------- Hostil 1
+class Virus{// --------------------------------------------> Hostil 1
     constructor(x, y, w, h, imagen, level){
         this.x = x
         this.y = y
@@ -110,16 +115,16 @@ class Virus{// ---------------------------- Hostil 1
     
     mostrar(){
         //ctx.fillRect(this.x, this.y, this.w, this.h)
-        ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h);
+        ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h)
         if(this.level === "simple"){
-            this.x -= 4;
+            this.x -= 4
         }else{
             this.x-=7
         }
     }
 }
 
-class Pildora{// ---------------------------- Hostil 1
+class Pildora{// -----------------------------------------> Aumentar-Vida
     constructor(x, y, w, h, imagen, level){
         this.x = x
         this.y = y
@@ -131,17 +136,33 @@ class Pildora{// ---------------------------- Hostil 1
     }
     
     mostrar(){
-        ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h);
+        ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h)
         if(this.level === "ramdom"){
-            this.x -= 4;
+            this.x -= 4
         }else{
             this.x-=7
         }
     }
 }
 
+class Vacunas{//----------------------------------------> Disparos
+    constructor(x, y, w, h, imagen){
+        this.x = x
+        this.y = y
+        this.w = w
+        this.h = h
+        this.imagen = imagen
 
-//====== ACCIONAR TECLAS ======
+    }
+    mostrar(){
+        ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h)
+        this.x +=5         
+    }
+    
+}
+
+
+//======================= ACCIONAR TECLAS ===========================
 
 function teclas(enfermero){
 
@@ -152,7 +173,7 @@ function teclas(enfermero){
                 enfermero.arriba()
                 break
             case "KeyS":
-                enfermero.abajo();
+                enfermero.abajo()
                 break
             case "KeyA":
                 console.log("izquierda")
@@ -177,7 +198,7 @@ const enfermero = new Nurse(5, 136, 17, 12, nurseImg, 0, 100)
 //====== CREACION DE OBJETOS =======
 function crearVirus(){
     
-    const cant = Math.floor(Math.random() * 60);
+    const cant = Math.floor(Math.random() * 60)
         if(cant === 4){  
         const viruses = new Virus(330, 136, 17, 12, virusImg)
         viral.push(viruses)
@@ -212,7 +233,7 @@ function crearVirus(){
 
 function crearPildoras(){
     
-    const cant = Math.floor(Math.random() * 2000);
+    const cant = Math.floor(Math.random() * 2000)
         if(cant === 4){  
         const pildora = new Virus(330, 136, 17, 12, pildoraImg)
         pildoras.push(pildora)
@@ -262,7 +283,7 @@ function iniciar(){
     enfermero.mostrar()
     mostrarInfo(enfermero.score, enfermero.vida)
    
-
+    // HOSTILES
     viral.forEach((virus, index) =>{
         console.log(viral)
         virus.mostrar()
@@ -273,24 +294,52 @@ function iniciar(){
                
             viral.splice(index, 1)
             enfermero.vida -= 20
+            if (enfermero.vida < 1){
+                alert("Game Over")
+            }
             
-            //alert("Game Over")
             //clearInterval(clear)
         }
         
     })
 
-    
+
+        //aumentar vida  
     pildoras.forEach((pildora, index) =>{
         console.log(pildoras)
         pildora.mostrar()
 
-        if (pildora.x <= enfermero.x + enfermero.w - 9 && pildora.x >= enfermero.x && pildora.y <= enfermero.y + enfermero.h && pildora.y >= enfermero.y && enfermero.vida < 100){
+        if (pildora.x <= enfermero.x + enfermero.w - 9 &&
+             pildora.x >= enfermero.x &&
+              pildora.y <= enfermero.y + enfermero.h &&
+               pildora.y >= enfermero.y &&
+                enfermero.vida < 100){
+
             pildoras.splice(index, 1)
-            enfermero.vida += 20
+            enfermero.vida += 10
         }
     })
 
+        //DISPAROS
+    jeringuillas.forEach((vacuna, vacIndex) => {
+        vacuna.mostrar()
+        viral.forEach((virus, virIndex) => {
+  
+        if (vacuna.x + vacuna.w >= virus.x &&
+            vacuna.x <= virus.x &&
+            vacuna.y + vacuna.h >= virus.y &&
+            vacuna.y <= virus.y) {
+
+        //eliminar la vacuna y el virus
+            jeringuillas.splice(vacIndex, 1)
+            viral.splice(virIndex, 1)
+            enfermero.score +=1
+                if (enfermero.score === 10){
+                    alert("Has vencido a la pandemia")
+                }
+            }
+        })
+    })
 
 
    
