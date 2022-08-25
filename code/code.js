@@ -1,6 +1,7 @@
 //======= LIENZO =======
 let lienzo = document.getElementById("lienzo")
 let ctx = lienzo.getContext("2d")
+//let idInterval
 
 //======= Musica ========
 let sound = new Audio("../sound/Música.mp3")
@@ -43,6 +44,7 @@ function mostrarInfo(score, vida){
     ctx.fillText("Anticovid Force", 120,12)
     //score
     ctx.fillText(`Score: ${score}`, 40, 65)
+    //vida
     ctx.fillText(`Vida: ${vida}`, 200, 65)
 }
 
@@ -59,29 +61,26 @@ class Nurse{// --------------------------------------------> Personaje
         this.score = score
         this.vida = vida
         }
+
     derecha(){
-        console.log("moverse hacia la derecha")
         if(this.x + this.w < 295){
             this.x += 5
         }  
     }
     
     izquierda(){
-        console.log("moverse hacia la izquierda")
         if (this.x > 0){
             this.x -= 5
         }
     }
 
     arriba(){
-        console.log("moverse hacia arriba")
         if(this.y > 86){
             this.y -= 13.5
         }  
     }
     
     abajo(){
-        console.log("moverse hacia abajo")
         if (this.y < 135){
             this.y += 13.5
         }
@@ -94,10 +93,8 @@ class Nurse{// --------------------------------------------> Personaje
     morirse(){
     }
     disparar(){
-        console.log("disparar")
         const vacuna = new Vacunas(this.x + this.w, this.y + 0, 17, 12, vacunaImg)
         jeringuillas.push(vacuna)
-        console.log(vacuna)
     }
 }
 
@@ -152,7 +149,6 @@ class Vacunas{//----------------------------------------> Disparos
         this.w = w
         this.h = h
         this.imagen = imagen
-
     }
     mostrar(){
         ctx.drawImage(this.imagen,this.x, this.y, this.w,this.h)
@@ -167,7 +163,6 @@ class Vacunas{//----------------------------------------> Disparos
 function teclas(enfermero){
 
     document.addEventListener("keyup",(evento) => {
-        console.log("Tecla tocada", evento.code)
         switch(evento.code){
             case "KeyW":
                 enfermero.arriba()
@@ -195,6 +190,7 @@ function teclas(enfermero){
 const enfermero = new Nurse(5, 136, 17, 12, nurseImg, 0, 100)
 
 
+
 //====== CREACION DE OBJETOS =======
 function crearVirus(){
     
@@ -203,31 +199,26 @@ function crearVirus(){
         const viruses = new Virus(330, 136, 17, 12, virusImg)
         viral.push(viruses)
         viruses.mostrar()
-        console.log("creando virus")
     }
         if(cant === 3){  
        const viruses2 = new Virus(330, 123, 17, 12, virus2Img)
         viral.push(viruses2)
         viruses2.mostrar()
-        console.log("creando virus")
     }
         if(cant === 2){  
         const viruses3 = new Virus(330, 109, 17, 12, virus3Img)
         viral.push(viruses3)
         viruses3.mostrar()
-        console.log("creando virus")
     }
         if(cant === 1){  
         const viruses4 = new Virus(330, 96, 17, 12, virus4Img)
         viral.push(viruses4)
         viruses4.mostrar()
-        console.log("creando virus")
     }
         if(cant === 0){  
         const viruses5 = new Virus(330, 82, 17, 12, virus5Img)
         viral.push(viruses5)
         viruses5.mostrar()
-        console.log("creando virus")
     }
 }
 
@@ -238,31 +229,26 @@ function crearPildoras(){
         const pildora = new Virus(330, 136, 17, 12, pildoraImg)
         pildoras.push(pildora)
         pildora.mostrar()
-        console.log("creando virus")
     }
         if(cant === 3){  
        const pildora2 = new Pildora(330, 123, 17, 12, pildoraImg)
        pildoras.push(pildora2)
         pildora2.mostrar()
-        console.log("creando virus")
     }
         if(cant === 2){  
         const pildora3 = new Pildora(330, 109, 17, 12, pildoraImg)
         pildoras.push(pildora3)
         pildora3.mostrar()
-        console.log("creando virus")
     }
         if(cant === 1){  
         const pildora4 = new Pildora(330, 96, 17, 12, pildoraImg)
         pildoras.push(pildora4)
         pildora4.mostrar()
-        console.log("creando virus")
     }
         if(cant === 0){  
         const pildora5 = new Pildora(330, 82, 17, 12, pildoraImg)
         pildoras.push(pildora5)
         pildora5.mostrar()
-        console.log("creando virus")
     }
 }
 
@@ -273,7 +259,6 @@ function crearPildoras(){
 function iniciar(){
 
     teclas(enfermero)
-    console.log(enfermero)
     enfermero.mostrar()
 
 }
@@ -285,7 +270,6 @@ function iniciar(){
    
     // HOSTILES
     viral.forEach((virus, index) =>{
-        console.log(viral)
         virus.mostrar()
         if (virus.x <= enfermero.x + enfermero.w - 9 &&
              virus.x >= enfermero.x && 
@@ -306,7 +290,6 @@ function iniciar(){
 
         //aumentar vida  
     pildoras.forEach((pildora, index) =>{
-        console.log(pildoras)
         pildora.mostrar()
 
         if (pildora.x <= enfermero.x + enfermero.w - 9 &&
