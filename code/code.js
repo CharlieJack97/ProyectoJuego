@@ -43,7 +43,7 @@ function mostrarInfo(score, vida){
     ctx.font = "10px georgia bond"
     ctx.fillText("Anticovid Force", 120,12)
     //score
-    ctx.fillText(`Score: ${score}/10`, 40, 65)
+    ctx.fillText(`Inmunizado: ${score}/10`, 40, 65)
     //vida
     ctx.fillText(`Vida: ${vida}`, 200, 65)
 }
