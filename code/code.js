@@ -4,33 +4,33 @@ let ctx = lienzo.getContext("2d")
 //let idInterval
 
 //======= Musica ========
-let sound = new Audio("../sound/Música.mp3")
+let sound = new Audio("./sound/Música.mp3")
 sound.play()
 
 //======= IMAGENES =======
 const nurseImg = new Image()
-nurseImg.src= "../image/Nurse3Male.webp"
+nurseImg.src= "./image/Nurse3Male.webp"
 
 const virusImg = new Image()
-virusImg.src = "../image/virus.png"
+virusImg.src = "./image/virus.png"
 
 const virus2Img = new Image()
-virus2Img.src = "../image/virus2.png"
+virus2Img.src = "./image/virus2.png"
 
 const virus3Img = new Image()
-virus3Img.src = "../image/virus3.png"
+virus3Img.src = "./image/virus3.png"
 
 const virus4Img = new Image()
-virus4Img.src = "../image/virus4.png"
+virus4Img.src = "./image/virus4.png"
 
 const virus5Img = new Image()
-virus5Img.src = "../image/virus5.png"
+virus5Img.src = "./image/virus5.png"
 
 const vacunaImg = new Image()
-vacunaImg.src = "../image/vacuna17x12.png"
+vacunaImg.src = "./image/vacuna2.png"
 
 const pildoraImg = new Image()
-pildoraImg.src = "../image/pildora.png"
+pildoraImg.src = "./image/pildora.png"
 
 
 //======= ELEMENTOS =======
@@ -43,7 +43,7 @@ function mostrarInfo(score, vida){
     ctx.font = "10px georgia bond"
     ctx.fillText("Anticovid Force", 120,12)
     //score
-    ctx.fillText(`Score: ${score}`, 40, 65)
+    ctx.fillText(`Score: ${score}/10`, 40, 65)
     //vida
     ctx.fillText(`Vida: ${vida}`, 200, 65)
 }
